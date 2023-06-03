@@ -6,8 +6,8 @@ metadata:
     app: postgres
 data:
   PROD_SECRET_KEY: i-love-ramen
-  PROD_DATABASE: jhkxbkmj
-  PROD_USER: jhkxbkmj
-  PROD_PASSWORD: yd3hzUJXEKfpBkeHu9B51roeh0ewJDGb
-  PROD_HOST: kashin.db.elephantsql.com
+  PROD_DATABASE: cqslfbzs
+  PROD_USER: cqslfbzs
+  PROD_PASSWORD: EShJ1nirj11A4-7UBBXKVda0OZxAB19Q
+  PROD_HOST: mahmud.db.elephantsql.com
   PROD_PORT: "5432"

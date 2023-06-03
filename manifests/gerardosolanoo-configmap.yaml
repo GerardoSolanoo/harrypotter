@@ -5,7 +5,7 @@ metadata:
   labels:
     app: postgres
 data:
-  PROD_SECRET_KEY: i-love-ramen
+  PROD_SECRET_KEY: i-love-graphql
   PROD_DATABASE: cqslfbzs
   PROD_USER: cqslfbzs
   PROD_PASSWORD: EShJ1nirj11A4-7UBBXKVda0OZxAB19Q

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'tnu4t!)b*qif0pxh4^qk7_gxwb+q5fohti=c1+i$ndq*-zi#0o'
+SECRET_KEY = config("PROD_SECRET_KEY", default='')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,15 +80,23 @@ WSGI_APPLICATION = 'harrypotter.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+PROD_DATABASE = config("PROD_DATABASE", default='')
+PROD_USER = config("PROD_USER", default='')
+PROD_PASSWORD = config("PROD_PASSWORD", default='')
+PROD_HOST = config("PROD_HOST", default='')
+PROD_PORT = config("PROD_PORT", default=5432)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'harrypotter',
-        'USER': 'postgres',
-        'PASSWORD': '19862003',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+        'NAME': PROD_DATABASE,
+        'USER': PROD_USER,
+        'PASSWORD': PROD_PASSWORD,
+        'HOST': PROD_HOST,
+        'PORT': PROD_PORT,
+        #'TEST': {
+        #    'NAME': TEST_DATABASE,
+        #},
+    },
 }
 
 # Authentication of the backend JWT
@@ -142,3 +151,14 @@ GRAPHENE = {
         'graphql_jwt.middleware.JSONWebTokenMiddleware',
     ],
 }
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+#CORS_ALLOW_METHODS = [
+#    'GET',
+#    'POST',
+#    'PUT',
+#    'PATCH',
+#    'DELETE',
+#    'OPTIONS'
+#]

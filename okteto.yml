@@ -9,4 +9,4 @@ dev:
   gerardosolanoo:
     command: bash
     sync:
-      - .:/hackernews # cambiar por su proyecto
+      - .:/harrypotter # cambiar por su proyecto

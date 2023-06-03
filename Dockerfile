@@ -6,4 +6,4 @@ WORKDIR /harrypotter
 COPY requeriments.txt /harrypotter/
 RUN pip install -r requeriments.txt
 COPY . /harrypotter/
-CMD python manage.py runserver 0.0.0.0:8080
+CMD python manage.py runserver 0.0.0.0:5080

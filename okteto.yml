@@ -1,0 +1,12 @@
+build:
+  gerardosolanoo: # cambiar por su namespace de okteto
+    image: okteto.dev/gerardosolanoo:latest # cambiar por su namespace de okteto
+
+deploy:
+  - okteto build # build the image with the latest code
+  - kubectl apply -f manifests # create all the resources in kubernetes
+dev:
+  gerardosolanoo:
+    command: bash
+    sync:
+      - .:/hackernews # cambiar por su proyecto

@@ -35,7 +35,7 @@ class CreateCharacter(graphene.Mutation):
     def mutate(self, info, name, lastname, house, age, patronus, description=None):
         user = info.context.user
 
-        if user.is_anonymous:
+        if not user.is_authenticated:
             raise GraphQLError('You must be logged in to create a character!')
 
         character = Character(
@@ -70,7 +70,7 @@ class CreateVote(graphene.Mutation):
 
     def mutate(self, info, character_id):
         user = info.context.user
-        if user.is_anonymous:
+        if not user.is_authenticated:
             raise GraphQLError('You must be logged in to vote!')
 
         character = Character.objects.filter(id=character_id).first()

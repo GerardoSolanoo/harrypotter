@@ -33,7 +33,10 @@ class CreateCharacter(graphene.Mutation):
         description = graphene.String()
 
     def mutate(self, info, name, lastname, house, age, patronus, description=None):
-        user = info.context.user or None
+        user = info.context.user
+
+        if user.is_anonymous:
+            raise GraphQLError('You must be logged in to create a character!')
 
         character = Character(
             name=name,
@@ -55,7 +58,8 @@ class CreateCharacter(graphene.Mutation):
             patronus=character.patronus,
             description=character.description,
             posted_by=user,
-        )
+       )
+
 
 class CreateVote(graphene.Mutation):
     user = graphene.Field(UserType)

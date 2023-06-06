@@ -54,7 +54,7 @@ class CreateCharacter(graphene.Mutation):
             age=character.age,
             patronus=character.patronus,
             description=character.description,
-            posted_by=character.posted_by,
+            posted_by=user.posted_by,
         )
 
 class CreateVote(graphene.Mutation):

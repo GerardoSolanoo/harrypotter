@@ -2,7 +2,7 @@ import graphene
 from graphene_django import DjangoObjectType
 from .models import Character
 from users.schema import UserType
-from characters.models import Character, Vote
+from characters.models import Vote
 from graphql import GraphQLError
 from django.db.models import Q
 
@@ -54,7 +54,7 @@ class CreateCharacter(graphene.Mutation):
             age=character.age,
             patronus=character.patronus,
             description=character.description,
-            posted_by=user.posted_by,
+            posted_by=user,
         )
 
 class CreateVote(graphene.Mutation):
@@ -67,7 +67,7 @@ class CreateVote(graphene.Mutation):
     def mutate(self, info, character_id):
         user = info.context.user
         if user.is_anonymous:
-            raise GraphQLError('You must be logged to vote!')
+            raise GraphQLError('You must be logged in to vote!')
 
         character = Character.objects.filter(id=character_id).first()
         if not character:
@@ -115,6 +115,5 @@ class Query(graphene.ObjectType):
 class Mutation(graphene.ObjectType):
     create_character = CreateCharacter.Field()
     create_vote = CreateVote.Field()
-
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
